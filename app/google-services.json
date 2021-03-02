@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "170880227946",
+    "project_id": "loger-aaab3",
+    "storage_bucket": "loger-aaab3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170880227946:android:84c2fd1c71f7853e9b0813",
+        "android_client_info": {
+          "package_name": "com.example.loger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170880227946-0cf7ck3gtp6uf6mck7p7ne4eijru1m09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXIw55bglWZ4EaydDz3zfuXTkuqqpY90M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "170880227946-0cf7ck3gtp6uf6mck7p7ne4eijru1m09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
