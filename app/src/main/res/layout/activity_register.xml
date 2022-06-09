@@ -58,7 +58,7 @@
             android:textColor="@color/white"
             android:layout_margin="20dp"
             android:gravity="center"
-            android:inputType="textCapSentences"
+            android:inputType="textCapCharacters"
             android:background="@drawable/edt"/>
     </LinearLayout>
 

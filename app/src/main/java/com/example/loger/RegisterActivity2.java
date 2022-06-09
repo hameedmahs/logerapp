@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -29,17 +30,15 @@ import static java.lang.Integer.parseInt;
 
 public class RegisterActivity2 extends AppCompatActivity {
 
-    TextView registertxt,usernametxt,passwordtxt,txtques1,repasswordtxt,textques_login,mobiletxt;
+    TextView registertxt,usernametxt,passwordtxt,txtques1;
+    TextView repasswordtxt,textques_login,mobiletxt;
     EditText et_username,et_password,et_repassword,et_mobile;
     Button bregister;
     boolean a=false;
     boolean ps=false;
     boolean c=false;
     float v=0;
-
     Boolean is_new=true;
-
-
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
@@ -54,15 +53,8 @@ public class RegisterActivity2 extends AppCompatActivity {
         pd.setCancelable(false);
         pd.setMessage("please wait");
 
-
-
-
         declaration();
         animationx();
-
-
-
-
 
         bregister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,9 +118,7 @@ public class RegisterActivity2 extends AppCompatActivity {
                 String ps_sem= pintent.getStringExtra("pssem");
                 String ps_name= pintent.getStringExtra("psname");
 
-
                 Intent intenti = new Intent(RegisterActivity2.this, VarifyActivity.class);
-
                 intenti.putExtra("S_username", S_username);
                 intenti.putExtra("phoneNo", S_mobile);
                 intenti.putExtra("S_password", S_password);
@@ -137,14 +127,14 @@ public class RegisterActivity2 extends AppCompatActivity {
                 intenti.putExtra("pssem",ps_sem);
                 intenti.putExtra("psname",ps_name);
                 intenti.putExtra("isRegistered",is_new);
+
                 pd.dismiss();
+
                 startActivity(intenti);
             } else {
                 pd.dismiss();
                 Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
-
-
         }
     }
     public void AlreadyRegistered(String testMobile){
@@ -153,7 +143,6 @@ public class RegisterActivity2 extends AppCompatActivity {
         CollectionReference reference = firestore.collection("Users");
 
         Query query = reference.whereEqualTo("phoneNo", testMobile);
-
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -175,14 +164,12 @@ public class RegisterActivity2 extends AppCompatActivity {
     }
     public static boolean Password_Validation(String password)
     {
-
         if(password.length()>=8)
         {
             Pattern letter = Pattern.compile("[a-zA-z]");
             Pattern digit = Pattern.compile("[0-9]");
             Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
             //Pattern eight = Pattern.compile (".{8}");
-
 
             Matcher hasLetter = letter.matcher(password);
             Matcher hasDigit = digit.matcher(password);
@@ -193,12 +180,7 @@ public class RegisterActivity2 extends AppCompatActivity {
         }
         else
             return false;
-
     }
-
-
-
-
 
     public void declaration(){
         registertxt=(TextView)findViewById(R.id.register_text);

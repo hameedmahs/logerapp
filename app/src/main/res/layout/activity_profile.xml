@@ -7,13 +7,9 @@
     tools:context=".ProfileActivity"
     android:orientation="vertical"
     android:weightSum="15">
-
-
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
         <LinearLayout
             android:background="@drawable/gradientbackground"
             android:layout_width="match_parent"
@@ -34,7 +30,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Wiliam Snoe"
+                android:text="username"
                 android:textColor="#fff"
                 android:textStyle="bold"
                 android:textSize="21sp"/>
@@ -73,7 +69,6 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:src="@drawable/ic_baseline_contacts_24"/>
-
                 </LinearLayout>
                 <LinearLayout
                     android:gravity="center"
@@ -82,20 +77,18 @@
                     android:layout_weight="1"
                     android:layout_height="match_parent">
                     <ImageView
+                        android:id="@+id/contact"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/ic_baseline_contacts_24"/>
-
+                        android:src="@drawable/send_feedback"/>
                 </LinearLayout>
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-    <LinearLayout
+        <LinearLayout
         android:id="@+id/alllini"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
@@ -118,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="Wiliam@gmail.com"/>
+                android:text="fullname"/>
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="25dp"
@@ -129,8 +122,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_baseline_phone_24"
-              />
+                android:src="@drawable/ic_baseline_phone_24" />
             <TextView
                 android:id="@+id/phone"
                 android:textStyle="bold"
@@ -138,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="+266 225 225"/>
+                android:text="phoneno"/>
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="25dp"
@@ -149,8 +141,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_baseline_insert_chart_24"
-              />
+                android:src="@drawable/ic_baseline_insert_chart_24" />
             <TextView
                 android:id="@+id/batch"
                 android:textStyle="bold"
@@ -158,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="BSC CS"/>
+                android:text="batch"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/liner3"
@@ -170,8 +161,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_baseline_playlist_add_check_24"
-              />
+                android:src="@drawable/ic_baseline_playlist_add_check_24" />
             <TextView
                 android:id="@+id/sem"
                 android:textStyle="bold"
@@ -179,15 +169,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="6th Semester"/>
-
-
+                android:text="6Semester"/>
         </LinearLayout>
-
-    </LinearLayout>
-
-
-
+        </LinearLayout>
         <Button
             android:id="@+id/logout"
             android:layout_width="match_parent"
@@ -197,6 +181,4 @@
             android:background="@drawable/buttonstyle"
             android:textColor="@color/navy"/>
     </RelativeLayout>
-
-
 </LinearLayout>

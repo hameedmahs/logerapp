@@ -28,8 +28,8 @@ import com.google.firebase.firestore.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.loger.RegisterActivity.KEY_BATCH;
 import static com.example.loger.RegisterActivity.MY_SHARED_PREFS;
-import static com.example.loger.RegisterActivity1.KEY_BATCH;
 
 public class SyllubusActivity extends AppCompatActivity {
 
@@ -68,7 +68,7 @@ public class SyllubusActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MY_SHARED_PREFS, MODE_PRIVATE);
 
-        String sp_batch = sharedPreferences.getString(KEY_BATCH, null);
+        String sp_batch = sharedPreferences.getString(KEY_BATCH, "BSC CS");
 
         Intent intent=getIntent();
         String semester=intent.getStringExtra("sem");
@@ -91,8 +91,7 @@ public class SyllubusActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull SyllabusViewHolder holder, int position, @NonNull Syllubus model) {
 
-                holder.title.setText(model.getSubject());
-                holder.unit.setText(model.getUnit());
+                holder.title.setText(model.getSub());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -108,12 +107,7 @@ public class SyllubusActivity extends AppCompatActivity {
                     }
                 });
                 holder.syllabus.setText(model.getSyllabus());
-
-
-
             }
-
-
         };
 
         nfirestorelist.setHasFixedSize(true);

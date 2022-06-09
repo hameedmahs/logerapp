@@ -11,7 +11,7 @@
         app:title="@string/app_name"
         android:outlineAmbientShadowColor="@color/white"
         android:background="@color/backround"
-        app:titleTextColor="@color/white"
+        app:titleTextColor="@color/navy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

@@ -132,6 +132,7 @@ public class ResultFragment extends Fragment {
                     public void onClick(View v) {
 
                         Intent intent=new Intent(getContext(),InternalsActivity.class);
+                        intent.putExtra("SEM_NAME",model.getSem());
                         startActivity(intent);
 
                     }

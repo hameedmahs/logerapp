@@ -52,7 +52,7 @@ public class InternalsActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.intrecy);
         Intent intent=getIntent();
-        String semester=intent.getStringExtra("sem");
+        String semester=intent.getStringExtra("SEM_NAME");
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 

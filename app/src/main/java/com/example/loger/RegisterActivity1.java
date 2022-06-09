@@ -34,7 +34,7 @@ public class RegisterActivity1 extends AppCompatActivity {
     private CollectionReference noteref=db.collection("collegestud");
 
     SharedPreferences sharedPreferences;
-    public static final String KEY_BATCH="BSC CS";
+
 
     public static  final String SHARED_PREFS="sharedPrefs";
     String s_name,s_batch,s_sem;
@@ -100,9 +100,7 @@ public class RegisterActivity1 extends AppCompatActivity {
                     et_name.setText(s_name);
                     et_batch.setText(s_batch);
                     et_semester.setText(s_sem);
-                    SharedPreferences.Editor editor=sharedPreferences.edit();
-                    editor.putString(KEY_BATCH,s_batch);
-                    editor.apply();
+
                     pd.dismiss();
 
                 }else{

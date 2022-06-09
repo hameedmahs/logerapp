@@ -26,9 +26,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import static com.example.loger.RegisterActivity.KEY_BATCH;
 import static com.example.loger.RegisterActivity.KEY_REGNO;
 import static com.example.loger.RegisterActivity.MY_SHARED_PREFS;
-import static com.example.loger.RegisterActivity1.KEY_BATCH;
+
+
 
 interface onNotelistener{
     void onNoteClick(int position);

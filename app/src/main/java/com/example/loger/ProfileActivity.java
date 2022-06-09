@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -50,18 +52,17 @@ public class ProfileActivity extends AppCompatActivity {
 
     TextView username,phoneNo,full_name,batch,semester;
     CircleImageView profile;
+    ImageView contact;
     private String s_batch,s_name,s_phone,s_username,s_sem,user_id;
     Button Logout;
 
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private CollectionReference noteref=db.collection("Users");
     private Uri imageuri;
     private String myUri;
     private StorageTask uploadTask;
-
     private StorageReference storageReference;
 
     @Override
@@ -72,18 +73,42 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         storageReference= FirebaseStorage.getInstance().getReference().child("Profile Pic");
 
-
         SharedPreferences preferences=getSharedPreferences(MY_SHARED_PREFS,MODE_PRIVATE);
         String s_lcode=preferences.getString(KEY_REGNO,null);
         user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
         phoneNo=findViewById(R.id.phone);
+        contact=(ImageView)findViewById(R.id.contact);
         Logout=findViewById(R.id.logout);
         username=findViewById(R.id.username);
         full_name=findViewById(R.id.fullname);
         batch=findViewById(R.id.batch);
         semester=findViewById(R.id.sem);
         profile=findViewById(R.id.profiledb);
+
+
+
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*new AlertDialog.Builder(getApplicationContext())
+                        .setTitle("title")
+                        .setMessage("Do you really want to whatever?")
+                        .setIcon(android.R.drawable.ic_menu_send)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {*/
+                                Intent intent=new Intent(Intent.ACTION_SENDTO);
+                                intent.setData(Uri.parse("mailto:"));
+                                intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"smacproject377@gmail.com"});
+                                intent.putExtra(intent.EXTRA_SUBJECT,"Unison Feedback");
+                                startActivity(intent);
+                        //    }
+                        //}).show();
+
+
+
+            }
+        });
 
         noteref.document(user_id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -109,23 +134,15 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(ProfileActivity.this, "Error while queriying", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-            profile.setOnClickListener(new View.OnClickListener() {
+        profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     CropImage.activity().setAspectRatio(1,1).start(ProfileActivity.this);
-
-
-                  //  Intent intent=new Intent(ProfileActivity.this,EditImageActivity.class);
-                    //startActivity(intent);
                 }
             });
-
-            Logout.setOnClickListener(new View.OnClickListener() {
+        Logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.clear();
                     editor.apply();
@@ -136,14 +153,9 @@ public class ProfileActivity extends AppCompatActivity {
                     finish();
                 }
             });
-
-                getUserInfo();
-
+        getUserInfo();
     }
-
     private void getUserInfo() {
-
-
         noteref.document(mAuth.getCurrentUser().getUid()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -156,10 +168,7 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 }
             }
-
         });
-
-
     }
 
     @Override
@@ -177,7 +186,6 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Error Try again", Toast.LENGTH_SHORT).show();
         }
         uploadProfileImage();
-
     }
 
 

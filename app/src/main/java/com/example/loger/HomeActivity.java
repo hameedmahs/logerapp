@@ -25,8 +25,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 
+import static com.example.loger.AlertFragment.KEYPAGE;
 import static com.example.loger.AlertFragment.KEY_COUNT;
+import static com.example.loger.RegisterActivity.KEY_BATCH;
 import static com.example.loger.RegisterActivity.MY_SHARED_PREFS;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -46,12 +49,19 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         auth=FirebaseAuth.getInstance();
+        SharedPreferences preferences=getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE);
 
+        SharedPreferences.Editor editor=preferences.edit();
+
+        Intent intent=getIntent();
+        String batch=intent.getStringExtra("batch");
+        editor.putString(KEY_BATCH,batch);
+        editor.apply();
 
         toolBar=findViewById(R.id.toolbar1);
         setSupportActionBar(toolBar);
 
-        SharedPreferences preferences=getSharedPreferences(MY_SHARED_PREFS, Context.MODE_PRIVATE);
+        toolBar.setBackgroundColor(0xFF03DAC5);
 
         bnv_Main=findViewById(R.id.bnv_Main);
         bnv_Main.add(new MeowBottomNavigation.Model(1,R.drawable.ic_notifications));
@@ -61,8 +71,10 @@ public class HomeActivity extends AppCompatActivity {
         bnv_Main.add(new MeowBottomNavigation.Model(5,R.drawable.ic_imagegallery));
         bnv_Main.show(1,true);
         String count=preferences.getString(KEY_COUNT,"2");
+
         bnv_Main.setCount(1,count);
         replace(new AlertFragment());
+
         bnv_Main.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
             public Unit invoke(MeowBottomNavigation.Model model) {
@@ -107,7 +119,7 @@ public class HomeActivity extends AppCompatActivity {
         });*/
     }
 
-    private void replace(Fragment fragment) {
+    public void replace(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame,fragment);
         transaction.commit();

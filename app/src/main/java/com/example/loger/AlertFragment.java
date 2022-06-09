@@ -67,6 +67,7 @@ public class AlertFragment extends Fragment {
     private CollectionReference noteref = db.collection("Users");
 
     public static final String KEY_COUNT="3";
+    public static final String KEYPAGE="3";
 
 
     @Override
@@ -125,6 +126,7 @@ public class AlertFragment extends Fragment {
                 i=i+1;
                 String count=Integer.toString(i);
                 editor.putString(KEY_COUNT,count);
+
                 editor.apply();
 
                 switch (model.getCategory()) {
@@ -190,8 +192,9 @@ public class AlertFragment extends Fragment {
                         Intent intent;
                         switch (model.getCategory()) {
                             case "FEE":
-                                intent = new Intent(getContext(), FeeInfoActivity.class);
-                                startActivity(intent);
+
+                                Toast.makeText(getContext(), model.getTitle_key(), Toast.LENGTH_SHORT).show();
+
 
                                 break;
                             case "ATTENDANCE":

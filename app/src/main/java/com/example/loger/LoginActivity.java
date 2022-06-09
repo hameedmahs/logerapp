@@ -25,9 +25,11 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import static com.example.loger.RegisterActivity.KEY_BATCH;
 import static com.example.loger.RegisterActivity.KEY_REGNO;
 
 import static com.example.loger.RegisterActivity.MY_SHARED_PREFS;
+
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -56,6 +58,16 @@ public class LoginActivity extends AppCompatActivity {
         pd.setCancelable(false);
         pd.setCanceledOnTouchOutside(false);
 
+        textques_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,9 +83,14 @@ public class LoginActivity extends AppCompatActivity {
     public void LoginAct()
 
     {
+
         String Ac_username = et_username.getText().toString().trim();
         String Ac_password = et_password.getText().toString().trim();
         String Ac_phoneno = et_phoneNo.getText().toString().trim();
+        if(Ac_password.isEmpty() || Ac_phoneno.isEmpty() ||Ac_username.isEmpty()){
+            pd.dismiss();
+            Toast.makeText(this, "Enter the all fields", Toast.LENGTH_SHORT).show();
+        }
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -91,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                         String db_password = document.getString("PASSWORD");
                         String db_regno = document.getString("REG_NO");
                         String db_sem = document.getString("CURRENT_SEM");
+                        String db_batch=document.getString("BATCH");
                         if (db_username.equals(Ac_username)) {
                             if (db_password.equals(Ac_password)) {
                                 pd.dismiss();
@@ -98,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor=preferences.edit();
                                 editor.putString(KEY_REGNO,db_regno);
                                 editor.putString(KEY_CUR_SEM,db_sem);
+                                editor.putString(KEY_BATCH,db_batch);
                                 editor.apply();
                                 Intent intent = new Intent(LoginActivity.this, VarifyActivity.class);
                                 intent.putExtra("phoneNo",Ac_phoneno );

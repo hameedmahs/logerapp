@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/navy"
+    android:background="@color/backround"
     tools:context=".InternalsActivity">
 
     <LinearLayout
@@ -22,8 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="subject"
-            android:textColor="@color/white"
+            android:text="SUBJECT"
+            android:background="@color/button1"
+            android:textColor="@color/navy"
             android:textSize="18dp"
 
             />
@@ -34,8 +35,9 @@
             android:layout_toRightOf="@+id/sub1"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:text="marks"
+            android:background="@color/button1"
+            android:textColor="@color/navy"
+            android:text="MARK"
             android:textSize="18dp"
 
             />

@@ -1,22 +1,29 @@
 package com.example.loger;
 
 public class Syllubus {
-    private  String unit;
-    private  String syllabus;
-    private  String subject;
-    private  boolean expanded;
+    private String unit;
+    private String syllabus;
+    private String sub;
+    private boolean expanded;
 
 
-
-    private Syllubus(){
+    private Syllubus() {
 
     }
 
-    public Syllubus(String unit, String syllabus, String subject) {
+    public String getSub() {
+        return sub;
+    }
+
+    public void setSub(String sub) {
+        this.sub = sub;
+    }
+
+    public Syllubus(String unit, String syllabus, String sub) {
         this.unit = unit;
         this.syllabus = syllabus;
-        this.subject = subject;
-        this.expanded=false;
+        this.sub = sub;
+        this.expanded = false;
     }
 
     public String getUnit() {
@@ -41,12 +48,5 @@ public class Syllubus {
 
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
-    }
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
     }
 }

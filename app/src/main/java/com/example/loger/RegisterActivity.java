@@ -27,6 +27,8 @@ import java.util.Date;
 public class RegisterActivity extends AppCompatActivity {
 
     public static final String MY_SHARED_PREFS = "sharedPrefs";
+    public static final String KEY_BATCH="BSC CS";
+
     public static final String KEY_REGNO = "text";
     TextView registertxt, regnotxt, dobtxt, txtques1, lcodetxt, textques_login;
     EditText et_regno, et_dob, et_lcode;
@@ -63,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
             }
         });
 

@@ -26,7 +26,6 @@ import java.util.Date;
 
 import static com.example.loger.RegisterActivity.KEY_REGNO;
 import static com.example.loger.RegisterActivity.MY_SHARED_PREFS;
-import static com.example.loger.RegisterActivity1.KEY_BATCH;
 
 public class FeeInfoActivity extends AppCompatActivity {
 

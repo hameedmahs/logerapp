@@ -17,7 +17,7 @@ public class OnBoardingFragment1 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup root=(ViewGroup) inflater.inflate(R.layout.fragment_on_boarding1,container,false);
+        ViewGroup root=(ViewGroup) inflater.inflate(R.layout.boarding_fragment_1,container,false);
 
         skip=root.findViewById(R.id.skipping);
 

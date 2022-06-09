@@ -46,6 +46,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.example.loger.RegisterActivity.MY_SHARED_PREFS;
 
+
 public class VarifyActivity extends AppCompatActivity {
 
     private static final String TAG = "read";
@@ -59,16 +60,15 @@ public class VarifyActivity extends AppCompatActivity {
    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
    private boolean getotpclicked=false;
    private TextView countdowntimer;
-   FirebaseUser user;
+
+    SharedPreferences sharedPreferences;
+
+    FirebaseUser user;
    FirebaseFirestore firebaseFirestore;
    private TextView resentotp;
    String user_id;
 
-
-
-
-
-    @Override
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_varify);
@@ -76,17 +76,11 @@ public class VarifyActivity extends AppCompatActivity {
         pd.setMessage("please wait...");
         pd.setCancelable(false);
         pd.setCanceledOnTouchOutside(false);
-
         firebaseFirestore=FirebaseFirestore.getInstance();
-
 
         declaration();
         animationx();
         phonenum_setup();
-
-
-
-
 
         bvarify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +98,6 @@ public class VarifyActivity extends AppCompatActivity {
         });
 
     }
-
     private void phonenum_setup() {
         if (!getotpclicked) {
             Intent intent = getIntent();
@@ -147,20 +140,16 @@ public class VarifyActivity extends AppCompatActivity {
                 public void onTick(long millisUntilFinished) {
 
                     countdowntimer.setText(""+millisUntilFinished/1000);
-
                 }
 
                 @Override
                 public void onFinish() {
                     resentotp.setVisibility(View.VISIBLE);
                     countdowntimer.setVisibility(View.INVISIBLE);
-
                 }
-
             }.start();
             Toast.makeText(VarifyActivity.this, "The OTP has sent to your number", Toast.LENGTH_SHORT).show();
         }
-
         @Override
         public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
             String code=phoneAuthCredential.getSmsCode();
@@ -183,7 +172,6 @@ public class VarifyActivity extends AppCompatActivity {
         signInTheUserByCredentials(credential);
         pd.dismiss();
     }
-
     private void signInTheUserByCredentials(PhoneAuthCredential credential) {
 
         mAuth.signInWithCredential(credential)
@@ -202,10 +190,13 @@ public class VarifyActivity extends AppCompatActivity {
                                 String password = mintent.getStringExtra("S_password");
                                 String phoneno = mintent.getStringExtra("phoneNo");
                                 Boolean is_new = mintent.getBooleanExtra("isRegistered",false);
+
+                                pd.dismiss();
                                 user_id = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
                                 if(is_new) {
                                     DocumentReference documentReference = firebaseFirestore.collection("Users").document(user_id);
                                     Map<String, String> users = new HashMap<>();
+
                                     users.put("USERNAME", username);
                                     users.put("PASSWORD", password);
                                     users.put("PHONE_NO", phoneno);
@@ -220,24 +211,60 @@ public class VarifyActivity extends AppCompatActivity {
                                             Log.d(TAG, "onSuccess: " + user_id);
                                         }
                                     });
-
                                 }
 
-
-                                pd.dismiss();
                                 Intent intenti = new Intent(VarifyActivity.this, HomeActivity.class);
                                 intenti.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intenti.putExtra("batch",ps_batch);
+
                                 startActivity(intenti);
                                 finish();
                             }
                         } else{
                             pd.dismiss();
                             Toast.makeText(VarifyActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }
+                        } }
                 });
     }
-    /*public boolean AlreadyRegistered(String userID){
+
+
+
+    public void declaration() {
+        countdowntimer=(TextView)findViewById(R.id.countdown_timer);
+        resentotp=(TextView)findViewById(R.id.resent_otp);
+        registertxt = (TextView) findViewById(R.id.register_text);
+        varifytxt = (TextView) findViewById(R.id.varify_text);
+        et_otp = (EditText) findViewById(R.id.et_otp);
+        bvarify = (Button) findViewById(R.id.bvarify);
+        textques_login = (TextView) findViewById(R.id.textques_login);
+        txtques1 = (TextView) findViewById(R.id.textques1);
+    }
+
+    public void animationx() {
+
+        registertxt.setTranslationX(800);
+        varifytxt.setTranslationX(800);
+        et_otp.setTranslationX(800);
+        txtques1.setTranslationX(800);
+        bvarify.setTranslationX(800);
+        textques_login.setTranslationX(800);
+
+        registertxt.setAlpha(v);
+        varifytxt.setAlpha(v);
+        et_otp.setAlpha(v);
+        txtques1.setAlpha(v);
+        bvarify.setAlpha(v);
+        textques_login.setAlpha(v);
+
+        registertxt.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(250).start();
+        varifytxt.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(300).start();
+        et_otp.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(350).start();
+        txtques1.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(450).start();
+        bvarify.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(400).start();
+        textques_login.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(450).start();
+
+    }
+     /*public boolean AlreadyRegistered(String userID){
         mAuth=FirebaseAuth.getInstance();
 
         firebaseFirestore=FirebaseFirestore.getInstance();
@@ -309,41 +336,4 @@ public class VarifyActivity extends AppCompatActivity {
         });
         return c=true;
     }*/
-
-
-    public void declaration() {
-        countdowntimer=(TextView)findViewById(R.id.countdown_timer);
-        resentotp=(TextView)findViewById(R.id.resent_otp);
-        registertxt = (TextView) findViewById(R.id.register_text);
-        varifytxt = (TextView) findViewById(R.id.varify_text);
-        et_otp = (EditText) findViewById(R.id.et_otp);
-        bvarify = (Button) findViewById(R.id.bvarify);
-        textques_login = (TextView) findViewById(R.id.textques_login);
-        txtques1 = (TextView) findViewById(R.id.textques1);
-    }
-
-    public void animationx() {
-
-        registertxt.setTranslationX(800);
-        varifytxt.setTranslationX(800);
-        et_otp.setTranslationX(800);
-        txtques1.setTranslationX(800);
-        bvarify.setTranslationX(800);
-        textques_login.setTranslationX(800);
-
-        registertxt.setAlpha(v);
-        varifytxt.setAlpha(v);
-        et_otp.setAlpha(v);
-        txtques1.setAlpha(v);
-        bvarify.setAlpha(v);
-        textques_login.setAlpha(v);
-
-        registertxt.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(250).start();
-        varifytxt.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(300).start();
-        et_otp.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(350).start();
-        txtques1.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(450).start();
-        bvarify.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(400).start();
-        textques_login.animate().translationX(0).alpha(1).setDuration(700).setStartDelay(450).start();
-
-    }
 }
